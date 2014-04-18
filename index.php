@@ -23,7 +23,13 @@ if( $tmh->request('GET', $tmh->url('1.1/account/verify_credentials')) !== 200 ){
 	echo 'ユーザー名：' . $_SESSION['user']['screen_name'] . '<br>';
 	echo 'ユーザーID：' . $_SESSION['user']['user_id'] . '<br>';
 	echo '<a href="./logout.php">ログアウト</a>';
-	var_dump($_SESSION['temp_oauth_token_secret'],$_SESSION['user']['oauth_token_secret']);
 	//$tmh->request("POST", $tmh->url("1.1/statuses/update") , array( "status" => "hello!" ) );
+	$res1 = $tmh->request('GET', $tmh->url('1.1/account/verify_credentials'));
+	if($res1 === 200){
+		$res2 = json_decode($tmh->response['response']);
+		echo "<pre>";
+		var_dump($res2);
+		echo "</pre>";
+	}
 }
 ?>
